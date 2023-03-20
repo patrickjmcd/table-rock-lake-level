@@ -30,15 +30,18 @@ jobs:
         if: ${{ github.ref_type == 'tag' }}
         run: |
           docker buildx build \
+          --push \
           --platform linux/amd64,linux/arm64 \
           --tag ghcr.io/patrickjmcd/table-rock-lake-level:${{ github.ref_name }} \
           .
+        
 
       - name: Commit Hash - Build, tag, and push image to Amazon ECR
         id: build-image-tag
         if: ${{ github.ref_type != 'tag' }}
         run: |
           docker buildx build \
+          --push \
           --platform linux/amd64,linux/arm64 \
           --tag ghcr.io/patrickjmcd/table-rock-lake-level:${{ env.SHORT_SHA }} \
           .
