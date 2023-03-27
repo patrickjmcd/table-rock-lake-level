@@ -96,9 +96,9 @@ export default function Navbar(props: NavbarProps) {
 									<div className="w-6 m-auto cursor-pointer mx-1">
 										<LifebuoyIcon className="block h-6 w-6 text-blue-900 dark:text-blue-200" aria-hidden="true" />
 									</div>
-									<div className="flex px-4 py-2 font-semibold text-green-50 dark:text-white">
+									<div className="flex px-4 py-2 font-semibold text-blue-900 dark:text-blue-200">
 										<Link href="/">
-											<div className="hidden sm:flex dark:hover:text-green-50 text-md cursor-pointer py-2 my-4">
+											<div className="hidden sm:flex dark:hover:text-blue-300 text-md cursor-pointer py-2 my-4">
 												Table Rock Lake Level
 											</div>
 										</Link>
