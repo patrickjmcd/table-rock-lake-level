@@ -21,27 +21,32 @@ export const getLevelData = async (
     startTime?: Date,
     endTime?: Date,
 ): Promise<LevelMeasurement[]> => {
-    await client.connect();
+    try {
+        await client.connect();
 
-    if (!endTime) {
-        endTime = new Date();
+        if (!endTime) {
+            endTime = new Date();
+        }
+
+        if (!startTime) {
+            startTime = new Date(new Date().setDate(endTime.getDate() - 21));
+        }
+
+        const db = client.db("lake-info");
+        const collection = db.collection<LevelMeasurement>("level");
+        const query = {
+            measuredAt: {
+                $gte: startTime,
+                $lte: endTime,
+            },
+        };
+        const response = await collection.find<LevelMeasurement>(query).toArray();
+        return response.map((level) => {
+            level._id = undefined;
+            return level;
+        });
+    } catch (e) {
+        console.error("Error getting level data", e);
+        return [];
     }
-
-    if (!startTime) {
-        startTime = new Date(new Date().setDate(endTime.getDate() - 21));
-    }
-
-    const db = client.db("lake-info");
-    const collection = db.collection<LevelMeasurement>("level");
-    const query = {
-        measuredAt: {
-            $gte: startTime,
-            $lte: endTime,
-        },
-    };
-    const response = await collection.find<LevelMeasurement>(query).toArray();
-    return response.map((level) => {
-        level._id = undefined;
-        return level;
-    });
 };
