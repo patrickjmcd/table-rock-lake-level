@@ -1,6 +1,8 @@
 name: build
 
-on: [ push ]
+on:
+  release:
+    types: [ published ]
 
 env:
   TAG: ${{ github.ref_name }}
@@ -8,40 +10,88 @@ env:
 jobs:
   build-image:
     name: "Build Image and push to Github Container Registry"
-    runs-on: ubuntu-latest
-
+    runs-on: ${{ matrix.builder }}
+    strategy:
+      matrix:
+        include:
+          - builder: ubuntu-latest
+            platform: linux/amd64
+          - builder: [ self-hosted, linux, ARM64 ]
+            platform: linux/arm64
+    
     steps:
+      - name: Prepare
+        run: |
+          platform=${{ matrix.platform }}
+          echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV
       - name: Clone
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
 
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v1
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.PAT }}
 
-      - name: build-image
-        id: build-image
-        run: |
-          docker buildx build \
-          --push \
-          --platform linux/amd64,linux/arm64 \
-          --tag ghcr.io/patrickjmcd/table-rock-lake-level:${{ github.sha }} \
-          .
-
-  update-k8s-flux:
-    name: "Update k8s-flux"
-    runs-on: ubuntu-latest
-    needs: build-image
-    steps:
-      - uses: actions/checkout@v3
+      - name: Build Image
+        uses: docker/build-push-action@v5
         with:
-          repository: "patrickjmcd/k8s-flux"
-          path: "k8s-flux"
+          context: .
+          push: true
+          platforms: ${{ matrix.platform }}
+          tags: ghcr.io/patrickjmcd/table-rock-lake-level:${{ github.sha }}-${{ env.PLATFORM_PAIR }}
+          build-args: |
+            GITHUB_TOKEN=${{ secrets.PAT }}
+
+  merge:
+    runs-on: ubuntu-latest
+    needs:
+      - build-image
+    steps:
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.PAT }}
+
+      - name: Create manifest
+        run: |
+          docker buildx imagetools create -t ghcr.io/patrickjmcd/table-rock-lake-level:${{ github.sha }} \
+            ghcr.io/patrickjmcd/table-rock-lake-level:${{ github.sha }}-linux-amd64 \
+            ghcr.io/patrickjmcd/table-rock-lake-level:${{ github.sha }}-linux-arm64
+  #        run: |
+  #          docker manifest create ghcr.io/patrickjmcd/table-rock-lake-level:${{ github.sha }} \
+  #            --amend ghcr.io/patrickjmcd/table-rock-lake-level:${{ github.sha }}-linux-amd64 \
+  #            --amend ghcr.io/patrickjmcd/table-rock-lake-level:${{ github.sha }}-linux-arm64
+  #      - name: Annotate AMD64
+  #        run: |
+  #          docker manifest annotate --arch amd64 --os linux ghcr.io/patrickjmcd/table-rock-lake-level:${{ github.sha }} ghcr.io/patrickjmcd/table-rock-lake-level:${{ github.sha }}-linux-amd64
+  #      - name: Annotate ARM64
+  #        run: |
+  #          docker manifest annotate --arch arm64 --os linux ghcr.io/patrickjmcd/table-rock-lake-level:${{ github.sha }} ghcr.io/patrickjmcd/table-rock-lake-level:${{ github.sha }}-linux-arm64
+  #      - name: Inspect Manifest
+  #        run: |
+  #          docker manifest inspect ghcr.io/patrickjmcd/table-rock-lake-level:${{ github.sha }}
+  #      - name: Push Manifest
+  #        run: |
+  #          docker manifest push ghcr.io/patrickjmcd/table-rock-lake-level:${{ github.sha }}
+
+  update-k8s-argo:
+    name: "Update k8s-argo"
+    runs-on: ubuntu-latest
+    needs:
+      - build-image
+      - merge
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: "patrickjmcd/k8s-argo"
+          path: "k8s-argo"
           token: ${{ secrets.PAT }}
 
       - name: Setup Kustomize
@@ -49,7 +99,7 @@ jobs:
 
       - name: Update Kubernetes resources & commit & push
         run: |
-          cd k8s-flux/cluster/apps/default/table-rock-lake-level
+          cd k8s-argo/apps/table-rock-lake-level
           kustomize edit set image table-rock-lake-level=ghcr.io/patrickjmcd/table-rock-lake-level:${{ github.sha }}
           cat kustomization.yaml
           git config --local user.email "action@github.com"

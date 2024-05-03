@@ -18,12 +18,14 @@ const Home = async () => {
     try {
         levelData = await getLevelData();
     } catch (e) {
+        console.log("error in home page, getting level data", e)
         return (<Error/>)
     }
 
 
     const latest = getLatest(levelData)
     if (!latest) {
+        console.log("couldn't get latest record")
         return (<Error/>)
     }
 
