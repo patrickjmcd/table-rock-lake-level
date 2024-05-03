@@ -1,15 +1,32 @@
-import {getLevelData} from "@/lib/level";
+import {getLevelData, LevelMeasurement} from "@/lib/level";
 import Graph from "@/components/Graph";
 import CurrentLevel from "@/components/CurrentLevel";
 import DataDisplay from "@/components/DataDisplay";
 import Link from "next/link";
 import React from "react";
+import Error from "@/app/error/page";
+
+const getLatest = (data: LevelMeasurement[]) => {
+    if (data.length > 0) {
+        return data[data.length - 1];
+    }
+}
+
 
 const Home = async () => {
-    const levelData = await getLevelData();
-    console.log(levelData);
+    let levelData: LevelMeasurement[] = [];
+    try {
+        levelData = await getLevelData();
+    } catch (e) {
+        return (<Error/>)
+    }
 
-    const latest = levelData[levelData.length - 2];
+
+    const latest = getLatest(levelData)
+    if (!latest) {
+        return (<Error/>)
+    }
+
     const darkModeEnabled = false;
 
     return (

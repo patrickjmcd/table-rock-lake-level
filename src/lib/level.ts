@@ -46,7 +46,7 @@ export const getLevelData = async (
             return level;
         });
     } catch (e) {
-        console.error("Error getting level data", e);
-        return [];
+        console.error("error in getLevelData", e);
+        throw e;
     }
 };
