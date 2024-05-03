@@ -1,0 +1,18 @@
+# Changelog
+
+## [0.2.0](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.1.2...v0.2.0) (2024-05-03)
+
+
+### Features
+
+* build and update k8s-flux ([ba5d3ab](https://github.com/patrickjmcd/table-rock-lake-level/commit/ba5d3abb647f0451d0747124b505afad1005cb67))
+* use mongo and switch to app router ([12d7ffc](https://github.com/patrickjmcd/table-rock-lake-level/commit/12d7ffcfada6a4e3238aea53b28d081f4c7a4c2d))
+
+
+### Bug Fixes
+
+* catch errors ([457f0c6](https://github.com/patrickjmcd/table-rock-lake-level/commit/457f0c6fdf2d9264f62c0b9950822755247bae7c))
+* error catching ([4a3e611](https://github.com/patrickjmcd/table-rock-lake-level/commit/4a3e611778b1611a38f28a24f7c3b87cf4cf75df))
+* release flow and errors ([8034714](https://github.com/patrickjmcd/table-rock-lake-level/commit/80347147e063aeb7bfca06a3fa32484bae86bc16))
+* use node v18 ([a49939d](https://github.com/patrickjmcd/table-rock-lake-level/commit/a49939d81bd1d812287b554da805e1dc1ec64bbf))
+* use node v18 ([14b4985](https://github.com/patrickjmcd/table-rock-lake-level/commit/14b498577bc5eb87f32c1021b5dbb810059ce88c))
