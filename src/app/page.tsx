@@ -4,7 +4,7 @@ import CurrentLevel from "@/components/CurrentLevel";
 import DataDisplay from "@/components/DataDisplay";
 import Link from "next/link";
 import React from "react";
-import ErrorPage from "@/app/error/page";
+import ErrorPage from "@/components/ErrorPage";
 
 const getLatest = (data: LevelMeasurement[]): LevelMeasurement | undefined => {
     if (data.length > 0) {

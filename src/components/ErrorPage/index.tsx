@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-interface ErrorPageProps {
+type ErrorPageProps = {
     err?: Error;
 }
 
@@ -15,7 +15,6 @@ const ErrorPage = ({err}: ErrorPageProps) => {
                     <h1 className="text-3xl my-4">Oh no!</h1>
                     <p className="text-lg">Something has gone seriously wrong.</p>
                     {err && <p className="text-lg">Error: {err.message}</p>}
-
                     <Link className="mt-10 underline" href="/">Go back to the main page?</Link>
 
                 </div>
