@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.4](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.2.3...v0.2.4) (2024-05-06)
+
+
+### Bug Fixes
+
+* error component instead of error page ([d829d8a](https://github.com/patrickjmcd/table-rock-lake-level/commit/d829d8aff308f92bbb50e66bf78cb78f7fac1a61))
+
 ## [0.2.3](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.2.2...v0.2.3) (2024-05-06)
 
 
