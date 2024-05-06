@@ -1,8 +1,19 @@
 "use server";
 import {MongoClient, ObjectId} from "mongodb";
 
+
+const getMongoURI = () => {
+    if (process.env.MONGODB_URI) {
+        console.log("connecting to mongo with uri from env", process.env.MONGODB_URI)
+        return process.env.MONGODB_URI;
+    } else {
+        console.log("connecting to mongo with default uri", "mongodb://192.168.8.100:27017/");
+        return "mongodb://192.168.8.100:27017/";
+    }
+}
+
 const client = new MongoClient(
-    process.env.MONGODB_URI || "mongodb://localhost:27017",
+    getMongoURI()
 );
 
 export interface LevelMeasurement {
