@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.3](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.2.2...v0.2.3) (2024-05-06)
+
+
+### Bug Fixes
+
+* display error, if exists ([3bfbc58](https://github.com/patrickjmcd/table-rock-lake-level/commit/3bfbc58600ced12dc9564d6c8bda309b15cffd24))
+
 ## [0.2.2](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.2.1...v0.2.2) (2024-05-06)
 
 
