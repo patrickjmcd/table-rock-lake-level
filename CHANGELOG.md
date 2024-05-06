@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.2.1...v0.2.2) (2024-05-06)
+
+
+### Bug Fixes
+
+* hostname ([d46c197](https://github.com/patrickjmcd/table-rock-lake-level/commit/d46c19765701d96da2eafa6ee1b369728ab9819e))
+
 ## [0.2.1](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.2.0...v0.2.1) (2024-05-06)
 
 
