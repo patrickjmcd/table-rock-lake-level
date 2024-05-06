@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.5](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.2.4...v0.2.5) (2024-05-06)
+
+
+### Bug Fixes
+
+* better mongo logging ([45b4813](https://github.com/patrickjmcd/table-rock-lake-level/commit/45b48130f3ada0b8a795430c22f709814bf5caaf))
+
 ## [0.2.4](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.2.3...v0.2.4) (2024-05-06)
 
 
