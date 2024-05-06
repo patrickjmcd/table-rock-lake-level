@@ -6,14 +6,16 @@ import Link from "next/link";
 import React from "react";
 import Error from "@/app/error/page";
 
-const getLatest = (data: LevelMeasurement[]) => {
+const getLatest = (data: LevelMeasurement[]): LevelMeasurement | undefined => {
     if (data.length > 0) {
         return data[data.length - 1];
     }
+    return undefined;
 }
 
 
 const Home = async () => {
+    console.log("fetching level data")
     let levelData: LevelMeasurement[] = [];
     try {
         levelData = await getLevelData();
@@ -22,8 +24,8 @@ const Home = async () => {
         return (<Error/>)
     }
 
-
     const latest = getLatest(levelData)
+    console.log("latest", latest)
     if (!latest) {
         console.log("couldn't get latest record")
         return (<Error/>)
