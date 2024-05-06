@@ -4,7 +4,7 @@ import CurrentLevel from "@/components/CurrentLevel";
 import DataDisplay from "@/components/DataDisplay";
 import Link from "next/link";
 import React from "react";
-import Error from "@/app/error/page";
+import ErrorPage from "@/app/error/page";
 
 const getLatest = (data: LevelMeasurement[]): LevelMeasurement | undefined => {
     if (data.length > 0) {
@@ -21,14 +21,15 @@ const Home = async () => {
         levelData = await getLevelData();
     } catch (e) {
         console.log("error in home page, getting level data", e)
-        return (<Error/>)
+        return (<ErrorPage err={e as Error}/>)
     }
 
     const latest = getLatest(levelData)
     console.log("latest", latest)
     if (!latest) {
         console.log("couldn't get latest record")
-        return (<Error/>)
+        const err = new Error("no latest record")
+        return (<ErrorPage err={err}/>)
     }
 
     const darkModeEnabled = false;
