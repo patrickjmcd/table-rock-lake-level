@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.7](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.2.6...v0.2.7) (2024-07-24)
+
+
+### Bug Fixes
+
+* use env var for mongo uri ([c797094](https://github.com/patrickjmcd/table-rock-lake-level/commit/c797094c3d0320027ba1cf52a77edda1a364c14e))
+
 ## [0.2.6](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.2.5...v0.2.6) (2024-05-08)
 
 
