@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.9](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.2.8...v0.2.9) (2024-07-24)
+
+
+### Bug Fixes
+
+* update build ([472b8dd](https://github.com/patrickjmcd/table-rock-lake-level/commit/472b8dde15ab5de07c07f0f01869602c91968416))
+
 ## [0.2.8](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.2.7...v0.2.8) (2024-07-24)
 
 
