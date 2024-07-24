@@ -1,9 +1,19 @@
 "use server";
 import { MongoClient, ObjectId } from "mongodb";
 
+const getMongoURI = () => {
+  if (process.env.MONGODB_URI) {
+    console.log(
+      "connecting to mongo with uri from env",
+      process.env.MONGODB_URI,
+    );
+    return process.env.MONGODB_URI;
+  }
+  console.error("MONGODB_URI not found in env");
+  return "mongodb://localhost:27017";
+};
 
-
-const client = new MongoClient(process.env.MONGODB_URI || "");
+const client = new MongoClient(getMongoURI());
 
 export interface LevelMeasurement {
   lakeName: string;
