@@ -8,9 +8,21 @@ env:
   TAG: ${{ github.ref_name }}
 
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      image_tag: ${{ steps.get_image_tag.outputs.image_tag }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Get Image Tag
+        id: get_image_tag
+        uses: patrickjmcd/get-image-tag@main
+
   build-image:
     name: "Build Image and push to Github Container Registry"
     runs-on: ${{ matrix.builder }}
+    needs: setup
     strategy:
       matrix:
         include:
@@ -43,13 +55,14 @@ jobs:
           context: .
           push: true
           platforms: ${{ matrix.platform }}
-          tags: ghcr.io/patrickjmcd/table-rock-lake-level:${{ github.sha }}-${{ env.PLATFORM_PAIR }}
+          tags: ghcr.io/patrickjmcd/table-rock-lake-level:${{ needs.setup.outputs.image_tag }}-${{ env.PLATFORM_PAIR }}
           build-args: |
             GITHUB_TOKEN=${{ secrets.PAT }}
 
   merge:
     runs-on: ubuntu-latest
     needs:
+      - setup
       - build-image
     steps:
       - name: Login to GitHub Container Registry
@@ -61,14 +74,15 @@ jobs:
 
       - name: Create manifest
         run: |
-          docker buildx imagetools create -t ghcr.io/patrickjmcd/table-rock-lake-level:${{ github.sha }} \
-            ghcr.io/patrickjmcd/table-rock-lake-level:${{ github.sha }}-linux-amd64 \
-            ghcr.io/patrickjmcd/table-rock-lake-level:${{ github.sha }}-linux-arm64
+          docker buildx imagetools create -t ghcr.io/patrickjmcd/table-rock-lake-level:${{ needs.setup.outputs.image_tag }} \
+            ghcr.io/patrickjmcd/table-rock-lake-level:${{ needs.setup.outputs.image_tag }}-linux-amd64 \
+            ghcr.io/patrickjmcd/table-rock-lake-level:${{ needs.setup.outputs.image_tag }}-linux-arm64
 
   update-k8s-argo:
     name: "Update k8s-argo"
     runs-on: ubuntu-latest
     needs:
+      - setup
       - build-image
       - merge
     steps:
@@ -84,7 +98,7 @@ jobs:
       - name: Update Kubernetes resources & commit & push
         run: |
           cd k8s-argo/apps/table-rock-lake-level
-          kustomize edit set image table-rock-lake-level=ghcr.io/patrickjmcd/table-rock-lake-level:${{ github.sha }}
+          kustomize edit set image table-rock-lake-level=ghcr.io/patrickjmcd/table-rock-lake-level:${{ needs.setup.outputs.image_tag }}
           cat kustomization.yaml
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
