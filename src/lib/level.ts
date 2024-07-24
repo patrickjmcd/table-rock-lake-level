@@ -9,11 +9,19 @@ const getMongoURI = () => {
     );
     return process.env.MONGODB_URI;
   }
-  console.error("MONGODB_URI not found in env");
-  return "mongodb://localhost:27017";
+  throw new Error("MONGODB_URI not found in env");
+
 };
 
-const client = new MongoClient(getMongoURI());
+let client: MongoClient;
+
+try {
+  client = new MongoClient(getMongoURI());
+} catch (e) {
+    console.error("error creating mongo client", e);
+
+}
+
 
 export interface LevelMeasurement {
   lakeName: string;
@@ -32,6 +40,10 @@ export const getLevelData = async (
   endTime?: Date,
 ): Promise<LevelMeasurement[]> => {
   try {
+    if (!client) {
+      throw new Error("mongo client not initialized");
+    }
+
     await client.connect();
 
     if (!endTime) {
