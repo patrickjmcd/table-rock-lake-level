@@ -7,6 +7,7 @@ type ErrorPageProps = {
 
 
 const ErrorPage = ({err}: ErrorPageProps) => {
+    console.log("mongodb_uri", process.env.MONGODB_URI)
     return (
         <div>
             <div className="w-full">

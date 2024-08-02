@@ -1,3 +1,4 @@
+'use server';
 import {getLevelData, LevelMeasurement} from "@/lib/level";
 import Graph from "@/components/Graph";
 import CurrentLevel from "@/components/CurrentLevel";
@@ -16,22 +17,9 @@ const getLatest = (data: LevelMeasurement[]): LevelMeasurement | undefined => {
 
 const Home = async () => {
     console.log("fetching level data")
-    let levelData: LevelMeasurement[] = [];
-    try {
-        levelData = await getLevelData();
-    } catch (e) {
-        console.log("error in home page, getting level data", e)
-        return (<ErrorPage err={e as Error}/>)
-    }
 
+    let levelData: LevelMeasurement[] = await getLevelData();
     const latest = getLatest(levelData)
-    console.log("latest", latest)
-    if (!latest) {
-        console.log("couldn't get latest record")
-        const err = new Error("no latest record")
-        return (<ErrorPage err={err}/>)
-    }
-
     const darkModeEnabled = false;
 
     return (

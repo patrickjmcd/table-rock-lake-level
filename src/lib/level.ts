@@ -1,27 +1,6 @@
 "use server";
-import { MongoClient, ObjectId } from "mongodb";
-
-const getMongoURI = () => {
-  if (process.env.MONGODB_URI) {
-    console.log(
-      "connecting to mongo with uri from env",
-      process.env.MONGODB_URI,
-    );
-    return process.env.MONGODB_URI;
-  }
-  throw new Error("MONGODB_URI not found in env");
-
-};
-
-let client: MongoClient;
-
-try {
-  client = new MongoClient(getMongoURI());
-} catch (e) {
-    console.error("error creating mongo client", e);
-
-}
-
+import { ObjectId } from "mongodb";
+import MongoClient from './mongoclient'
 
 export interface LevelMeasurement {
   lakeName: string;
@@ -40,11 +19,13 @@ export const getLevelData = async (
   endTime?: Date,
 ): Promise<LevelMeasurement[]> => {
   try {
-    if (!client) {
-      throw new Error("mongo client not initialized");
+    if (!MongoClient) {
+      console.error("MongoClient not initialized");
+      return [];
     }
 
-    await client.connect();
+    await MongoClient.connect();
+    console.log("connected to mongo")
 
     if (!endTime) {
       endTime = new Date();
@@ -54,7 +35,7 @@ export const getLevelData = async (
       startTime = new Date(new Date().setDate(endTime.getDate() - 21));
     }
 
-    const db = client.db("lake-info");
+    const db = MongoClient.db("lake-info");
     const collection = db.collection<LevelMeasurement>("level");
     const query = {
       measuredAt: {
@@ -62,6 +43,9 @@ export const getLevelData = async (
         $lte: endTime,
       },
     };
+    console.log("db", db)
+    console.log("collection", collection)
+    console.log("query", query)
     const response = await collection
       .find<LevelMeasurement>(query, {
         sort: { measuredAt: 1 },

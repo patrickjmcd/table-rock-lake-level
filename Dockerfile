@@ -1,4 +1,4 @@
-FROM node:18-alpine AS base
+FROM node:22-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -27,7 +27,6 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
-ENV MONGODB_URI "mongodb://localhost:27017/nextjs"
 
 RUN \
   if [ -f yarn.lock ]; then yarn run build; \
