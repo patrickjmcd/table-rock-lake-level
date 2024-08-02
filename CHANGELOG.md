@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.11](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.2.10...v0.2.11) (2024-08-02)
+
+
+### Bug Fixes
+
+* mongo client ([a112bb5](https://github.com/patrickjmcd/table-rock-lake-level/commit/a112bb5dce90156bca9b4a9e92f0a8d4bbe69db3))
+
 ## [0.2.10](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.2.9...v0.2.10) (2024-07-24)
 
 
