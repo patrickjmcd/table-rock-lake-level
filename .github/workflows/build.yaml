@@ -49,6 +49,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.PAT }}
 
+      - name: create .env.local file with MONGODB_URI
+        run: |
+          echo "MONGODB_URI=${{ secrets.MONGODB_URI }}" > .env.local
+
       - name: Build Image
         uses: docker/build-push-action@v5
         with:
