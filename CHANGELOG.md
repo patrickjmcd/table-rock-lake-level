@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.3.0...v0.3.1) (2024-08-05)
+
+
+### Bug Fixes
+
+* pnpm version ([0c7261c](https://github.com/patrickjmcd/table-rock-lake-level/commit/0c7261c331cfb4204ba3baaaf41b95f34075facc))
+
 ## [0.3.0](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.2.13...v0.3.0) (2024-08-05)
 
 
