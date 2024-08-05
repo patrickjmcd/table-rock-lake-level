@@ -2,6 +2,7 @@ import React, {ReactNode} from "react";
 import {Metadata} from "next";
 import '../styles/globals.css';
 import Navbar from "@/components/NavbarSimple";
+import {ThemeProvider} from "next-themes";
 
 export const metadata: Metadata = {
     title: "Table Rock Lake Level",
@@ -10,7 +11,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: { children: ReactNode }) {
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning>
+        <ThemeProvider attribute="class">
         <body className="bg-blue-500 dark:bg-slate-800 dark:text-white">
         <Navbar/>
         <div className="w-full min-h-full">
@@ -21,6 +23,7 @@ export default function RootLayout({children}: { children: ReactNode }) {
 
         </div>
         </body>
+        </ThemeProvider>
         </html>
     );
 }

@@ -1,4 +1,3 @@
-'use server';
 import {getLevelData, LevelMeasurement} from "@/lib/level";
 import Graph from "@/components/Graph";
 import CurrentLevel from "@/components/CurrentLevel";
@@ -6,6 +5,8 @@ import DataDisplay from "@/components/DataDisplay";
 import Link from "next/link";
 import React from "react";
 import ErrorPage from "@/components/ErrorPage";
+
+export const dynamic = 'force-dynamic';
 
 const getLatest = (data: LevelMeasurement[]): LevelMeasurement | undefined => {
     if (data.length > 0) {
