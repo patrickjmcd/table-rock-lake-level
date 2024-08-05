@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.2.13...v0.3.0) (2024-08-05)
+
+
+### Features
+
+* add light/dark mode toggle ([c862a4b](https://github.com/patrickjmcd/table-rock-lake-level/commit/c862a4b0ed871815c278125bcfbb5bb9f743050a))
+
 ## [0.2.13](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.2.12...v0.2.13) (2024-08-02)
 
 
