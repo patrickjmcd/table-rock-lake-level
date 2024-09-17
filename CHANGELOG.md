@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.3.2](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.3.1...v0.3.2) (2024-09-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @headlessui/react to v2 ([717422a](https://github.com/patrickjmcd/table-rock-lake-level/commit/717422a98201cb3ec166da65c44bf31f352d5f68))
+* **deps:** update dependency @heroicons/react to v2.1.5 ([b68459f](https://github.com/patrickjmcd/table-rock-lake-level/commit/b68459f812b83bb943eeb027c0a8edd6299cc811))
+* **deps:** update dependency mongodb to v6.9.0 ([218f29a](https://github.com/patrickjmcd/table-rock-lake-level/commit/218f29a1a6f1bc7bc78dc0dd8541b0b736cb214d))
+* **deps:** update dependency recharts to v2.12.7 ([f538609](https://github.com/patrickjmcd/table-rock-lake-level/commit/f5386092c23094ae5802c948b5bc7c4fd827a2d1))
+* **deps:** update dependency typescript to v5.6.2 ([51fadcb](https://github.com/patrickjmcd/table-rock-lake-level/commit/51fadcb54a6a8821ce9ac3c9d177c1204054d165))
+
 ## [0.3.1](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.3.0...v0.3.1) (2024-08-05)
 
 
