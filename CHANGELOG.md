@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.3.3](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.3.2...v0.3.3) (2025-05-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @headlessui/react to v2.2.4 ([b8a140d](https://github.com/patrickjmcd/table-rock-lake-level/commit/b8a140dfa6dc3a286047e2a42cc9eeefba9e62d8))
+* **deps:** update dependency @heroicons/react to v2.2.0 ([ef834e7](https://github.com/patrickjmcd/table-rock-lake-level/commit/ef834e7770554031144771c2bb8e26049f43bf20))
+* **deps:** update dependency mongodb to v6.16.0 ([359efb6](https://github.com/patrickjmcd/table-rock-lake-level/commit/359efb602fb0c654e7808174dba00efdba07f17b))
+* **deps:** update dependency next-themes to ^0.4.0 ([4ca2929](https://github.com/patrickjmcd/table-rock-lake-level/commit/4ca2929d6ea8b4b895e5bb5c064758c84d15d854))
+* **deps:** update dependency recharts to v2.15.3 ([6cc2485](https://github.com/patrickjmcd/table-rock-lake-level/commit/6cc24851c6da04f888413a39514738c814dd55a9))
+* **deps:** update dependency typescript to v5.8.3 ([51b56c7](https://github.com/patrickjmcd/table-rock-lake-level/commit/51b56c78fd5fe792ba2b21e8f236c89f2e411c30))
+* **deps:** update nextjs monorepo to v14.2.29 ([0c91290](https://github.com/patrickjmcd/table-rock-lake-level/commit/0c912900a227a3f48a7c1469e1359e34d1852259))
+* **deps:** update react monorepo to v19 ([95ae250](https://github.com/patrickjmcd/table-rock-lake-level/commit/95ae250a1b6d5c49e3ad7a4a31c6e7507995615b))
+
 ## [0.3.2](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.3.1...v0.3.2) (2024-09-17)
 
 
