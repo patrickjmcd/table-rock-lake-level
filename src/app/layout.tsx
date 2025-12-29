@@ -12,7 +12,6 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: { children: ReactNode }) {
     return (
         <html lang="en" suppressHydrationWarning>
-        <ThemeProvider attribute="class">
             <body className="bg-blue-500 dark:bg-slate-800 dark:text-white">
             <Navbar/>
             <div className="w-full min-h-full">
@@ -22,7 +21,6 @@ export default function RootLayout({children}: { children: ReactNode }) {
                 </main>
             </div>
             </body>
-        </ThemeProvider>
         </html>
     );
 }
