@@ -36,7 +36,7 @@ export function LevelDataTable<TData, TValue>({
 
 	return (
 		<div>
-			<div className="overflow-hidden rounded-md border">
+			<div className="overflow-hidden rounded-2xl border border-white/10 bg-slate-900/60 shadow-inner shadow-sky-900/30 backdrop-blur">
 				<Table>
 					<TableHeader>
 						{table.getHeaderGroups().map((headerGroup) => (

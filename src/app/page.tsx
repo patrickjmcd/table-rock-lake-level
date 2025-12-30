@@ -4,7 +4,6 @@ import ErrorPage from "@/components/ErrorPage";
 import Graph from "@/components/Graph";
 import { levelColumns } from "@/components/LevelTable/columns";
 import { LevelDataTable } from "@/components/LevelTable/data-table";
-import { SectionCards } from "@/components/SectionCards";
 import {
 	getLevelData,
 	getLevelLastYear,
@@ -70,8 +69,6 @@ const Home = async () => {
 					</div>
 				</section>
 
-				<SectionCards data={levelData} levelLastYear={levelLastYear} />
-
 				<div className="grid gap-6 lg:grid-cols-3">
 					<div className="rounded-3xl border border-white/10 bg-white/5 p-4 shadow-2xl shadow-sky-900/40 lg:col-span-2">
 						<div className="mb-4 flex items-center justify-between">
@@ -104,7 +101,7 @@ const Home = async () => {
 								<p className="text-5xl font-semibold text-white">
 									{round(latestMeasurement?.level ?? 0, 2)} ft
 								</p>
-								<span className="rounded-full border border-emerald-300/30 bg-emerald-400/10 px-3 py-1 text-sm font-medium text-emerald-100">
+								<span className="whitespace-nowrap rounded-full border border-emerald-300/30 bg-emerald-400/10 px-3 py-1 text-sm font-medium text-emerald-100">
 									{ftAboveFullPool >= 0 ? "Above" : "Below"} full pool
 								</span>
 							</div>
