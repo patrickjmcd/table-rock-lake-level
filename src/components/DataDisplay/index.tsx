@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import type { LevelMeasurement } from "@/lib/level";
-import {Button} from "@/components/ui/button";
 
 interface DataDisplayProps {
 	data: LevelMeasurement[];
@@ -14,7 +14,7 @@ const DataDisplay = ({ data }: DataDisplayProps) => {
 		<div>
 			<div className="w-full my-4">
 				<Button
-					variant={'default'}
+					variant={"default"}
 					type={"button"}
 					onClick={() => setShowData(!showData)}
 				>
