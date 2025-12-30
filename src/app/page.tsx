@@ -112,7 +112,7 @@ const Home = async () => {
 							<div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
 								<div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm">
 									<p className="text-slate-300">Trend vs. last reading</p>
-									<div className="mt-2 flex items-center gap-3">
+									<div className="mt-2 flex items-start gap-3 sm:items-center">
 										<span
 											className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-semibold ${
 												changeFromLastReading === null
@@ -151,7 +151,7 @@ const Home = async () => {
 														? "Falling"
 														: "Holding steady"}
 										</span>
-										<p className="text-xs text-slate-300">
+										<p className="flex-1 min-w-0 break-words text-xs leading-relaxed text-slate-300">
 											Based on the previous measurement in this feed.
 										</p>
 									</div>
