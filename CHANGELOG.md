@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.4.0...v0.4.1) (2025-12-30)
+
+
+### Bug Fixes
+
+* multi-arch images ([253a7c4](https://github.com/patrickjmcd/table-rock-lake-level/commit/253a7c4fee800d076e7d6befd1a6cf7bf3dcf770))
+
 ## [0.4.0](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.3.2...v0.4.0) (2025-12-30)
 
 
