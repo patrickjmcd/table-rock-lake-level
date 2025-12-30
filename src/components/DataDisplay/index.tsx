@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { LevelMeasurement } from "@/lib/level";
+import {Button} from "@/components/ui/button";
 
 interface DataDisplayProps {
 	data: LevelMeasurement[];
@@ -12,13 +13,13 @@ const DataDisplay = ({ data }: DataDisplayProps) => {
 	return (
 		<div>
 			<div className="w-full my-4">
-				<button
+				<Button
+					variant={'default'}
 					type={"button"}
-					className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-sm"
 					onClick={() => setShowData(!showData)}
 				>
 					Toggle Raw Data
-				</button>
+				</Button>
 			</div>
 			{showData && (
 				<div className="w-full my-4 text-gray-700 bg-gray-100 font-mono">

@@ -1,4 +1,5 @@
 "use server";
+
 import type { ObjectId } from "mongodb";
 import MongoClient from "./mongoclient";
 
@@ -25,7 +26,6 @@ export const getLevelData = async (
 		}
 
 		await MongoClient.connect();
-		console.log("connected to mongo");
 
 		if (!endTime) {
 			endTime = new Date();
@@ -43,9 +43,6 @@ export const getLevelData = async (
 				$lte: endTime,
 			},
 		};
-		console.log("db", db);
-		console.log("collection", collection);
-		console.log("query", query);
 		const response = await collection
 			.find<LevelMeasurement>(query, {
 				sort: { measuredAt: 1 },
@@ -60,4 +57,24 @@ export const getLevelData = async (
 		console.error("error in getLevelData", e);
 		throw e;
 	}
+};
+
+export const getLevelLastYear = async (): Promise<
+	LevelMeasurement | undefined
+> => {
+	const now = new Date();
+	const oneYearAgo = new Date(
+		now.getFullYear() - 1,
+		now.getMonth(),
+		now.getDate(),
+	);
+	// 24 hours buffer
+	const startTime = new Date(oneYearAgo.getTime() - 24 * 60 * 60 * 1000);
+	console.log("Fetching level data from", startTime, "to", oneYearAgo);
+	const data = await getLevelData(startTime, oneYearAgo);
+	if (data.length === 0) {
+		console.error("No level data found for", startTime, "to", oneYearAgo);
+		return undefined;
+	}
+	return data[data.length - 1];
 };

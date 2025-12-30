@@ -5,28 +5,35 @@ import {
 	AreaChart,
 	CartesianGrid,
 	ReferenceLine,
-	ResponsiveContainer,
-	Tooltip,
 	XAxis,
 	YAxis,
 } from "recharts";
+import {
+	type ChartConfig,
+	ChartContainer,
+	ChartTooltip,
+	ChartTooltipContent,
+} from "@/components/ui/chart";
 import type { LevelMeasurement } from "@/lib/level";
-
-const darkModeGraphTextColor = "#DBEAFE";
-const lightModeGraphTextColor = "#0EA5E9";
 
 interface GraphProps {
 	levelData: LevelMeasurement[];
-	darkModeEnabled: boolean;
 }
 
-const Graph = ({ levelData, darkModeEnabled }: GraphProps) => {
+const Graph = ({ levelData }: GraphProps) => {
+	const chartConfig = {
+		level: {
+			label: "Water Level (ft.)",
+			color: "var(--chart-3)",
+		},
+	} satisfies ChartConfig;
+
 	const domain = [
 		levelData[0].measuredAt.getTime(),
 		levelData[levelData.length - 1].measuredAt.getTime(),
 	];
 	return (
-		<ResponsiveContainer minWidth={300} minHeight={600}>
+		<ChartContainer config={chartConfig} className="min-h-150 w-full">
 			<AreaChart
 				id={"level"}
 				width={900}
@@ -39,6 +46,20 @@ const Graph = ({ levelData, darkModeEnabled }: GraphProps) => {
 					bottom: 5,
 				}}
 			>
+				<defs>
+					<linearGradient id="fillLevel" x1="0" y1="0" x2="0" y2="1">
+						<stop
+							offset="5%"
+							stopColor="var(--color-level)"
+							stopOpacity={0.8}
+						/>
+						<stop
+							offset="95%"
+							stopColor="var(--color-level)"
+							stopOpacity={0.1}
+						/>
+					</linearGradient>
+				</defs>
 				<CartesianGrid strokeDasharray="3 3" />
 				<XAxis
 					xAxisId="0"
@@ -47,56 +68,53 @@ const Graph = ({ levelData, darkModeEnabled }: GraphProps) => {
 					scale="time"
 					tickFormatter={(v, _i) => moment(v).format("MMM Do YY")}
 					dataKey="measuredAt"
-					// tick={{stroke: darkModeEnabled ? "#DBEAFE" : "#DBEAFE"}}
 				/>
-				<YAxis
-					type="number"
-					domain={[900, 950]}
-					// tick={{stroke: darkModeEnabled ? "#DBEAFE" : "#DBEAFE"}}
-				/>
-				<Tooltip
-					formatter={(value, _name, _props) => [`${value} ft.`, "Level"]}
-					labelFormatter={(value, _props) =>
-						moment(value).format("MMM Do YY h:mm:ss a")
+				<YAxis type="number" domain={[900, 950]} />
+				<ChartTooltip
+					content={
+						<ChartTooltipContent
+							labelKey={"measuredAt"}
+							labelFormatter={(_value, props) => {
+								if (!props || props.length === 0) {
+									return "";
+								}
+								return moment(props[0].payload.measuredAt).format(
+									"MMM Do YY h:mm:ss a",
+								);
+							}}
+						/>
 					}
-					contentStyle={{
-						color: darkModeEnabled
-							? darkModeGraphTextColor
-							: lightModeGraphTextColor,
-						background: darkModeEnabled ? "#1F2937" : "#DBEAFE",
-					}}
 				/>
 				<ReferenceLine
 					y={915}
 					label="Full Pool"
-					stroke="blue"
+					stroke="var(--chart-1)"
 					strokeDasharray="3 3"
 				/>
 				<ReferenceLine
 					y={935.47}
 					label="Record High (Apr 27, 2011)"
-					stroke="orange"
+					stroke="var(--chart-2)"
 					strokeDasharray="3 3"
 				/>
 				<ReferenceLine
 					y={947}
 					label="Max Capacity (top of dam)"
-					stroke="red"
+					stroke="var(--color-red-600)"
 					strokeDasharray="3 3"
 				/>
 
 				{/* <Legend /> */}
 				<Area
-					type="monotone"
+					type="natural"
 					dataKey="level"
-					stroke={
-						darkModeEnabled ? darkModeGraphTextColor : lightModeGraphTextColor
-					}
+					stroke={"var(--color-level"}
+					fill={"url(#fillLevel)"}
 					name="level"
 					dot={false}
 				/>
 			</AreaChart>
-		</ResponsiveContainer>
+		</ChartContainer>
 	);
 };
 

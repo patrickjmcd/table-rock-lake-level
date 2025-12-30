@@ -3,7 +3,14 @@ import CurrentLevel from "@/components/CurrentLevel";
 import DataDisplay from "@/components/DataDisplay";
 import ErrorPage from "@/components/ErrorPage";
 import Graph from "@/components/Graph";
-import { getLevelData, type LevelMeasurement } from "@/lib/level";
+import { levelColumns } from "@/components/LevelTable/columns";
+import { LevelDataTable } from "@/components/LevelTable/data-table";
+import { SectionCards } from "@/components/SectionCards";
+import {
+	getLevelData,
+	getLevelLastYear,
+	type LevelMeasurement,
+} from "@/lib/level";
 
 export const dynamic = "force-dynamic";
 
@@ -18,20 +25,20 @@ const Home = async () => {
 	console.log("fetching level data");
 	try {
 		const levelData: LevelMeasurement[] = await getLevelData();
-		const latest = getLatest(levelData);
-		const darkModeEnabled = false;
-
+		const levelLastYear = await getLevelLastYear();
 		return (
 			<div>
-				<div className="flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 ">
-					<div className="w-full sm:w-1/2 my-4">
-						<CurrentLevel latest={latest} />
+				<div className="@container/main flex flex-1 flex-col px-4 sm:px-6 lg:px-8 ">
+					<SectionCards data={levelData} levelLastYear={levelLastYear} />
+
+					<div className="w-full my-4">
+						<Graph levelData={levelData} />
 					</div>
 					<div className="w-full my-4">
-						<Graph levelData={levelData} darkModeEnabled={darkModeEnabled} />
-					</div>
-					<div className="w-full my-4">
-						<DataDisplay data={levelData} />
+						<LevelDataTable
+							data={levelData.toReversed()}
+							columns={levelColumns}
+						/>
 					</div>
 
 					<div className="w-full my-4">

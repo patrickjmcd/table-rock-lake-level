@@ -1,6 +1,5 @@
 import { LifebuoyIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import ThemeToggle from "@/components/ThemeToggle";
 
 const NavbarSimple = () => {
 	return (
@@ -17,7 +16,6 @@ const NavbarSimple = () => {
 
 			<nav>
 				<ul className="navbar flex items-center text-xl font-medium text-gray-800"></ul>
-				<ThemeToggle />
 			</nav>
 		</div>
 	);
