@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<body className="bg-blue-500 dark:bg-slate-800 dark:text-white">
+			<body className="min-h-screen bg-slate-950 text-slate-50 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.15),transparent_35%),radial-gradient(circle_at_80%_0%,rgba(14,165,233,0.2),transparent_30%),linear-gradient(135deg,#0f172a_0%,#020617_50%,#0b1224_100%)]">
 				<Navbar />
-				<div className="w-full min-h-full">
-					<main className="pt-0 lg:mt-6 mt-2 lg:mx-6 mx-2 lg:p-8 lg:mb-8  min-h-full bg-blue-50 dark:bg-cyan-900 rounded-xl">
+				<div className="w-full">
+					<main className="mx-auto w-full max-w-7xl px-4 pb-16 pt-10 sm:px-6 lg:px-8">
 						{children}
 					</main>
 				</div>

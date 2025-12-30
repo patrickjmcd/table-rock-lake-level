@@ -5,6 +5,7 @@ import {
 	AreaChart,
 	CartesianGrid,
 	ReferenceLine,
+	ResponsiveContainer,
 	XAxis,
 	YAxis,
 } from "recharts";
@@ -34,86 +35,94 @@ const Graph = ({ levelData }: GraphProps) => {
 	];
 	return (
 		<ChartContainer config={chartConfig} className="min-h-150 w-full">
-			<AreaChart
-				id={"level"}
-				width={900}
-				height={600}
-				data={levelData}
-				margin={{
-					top: 5,
-					right: 5,
-					left: 5,
-					bottom: 5,
-				}}
-			>
-				<defs>
-					<linearGradient id="fillLevel" x1="0" y1="0" x2="0" y2="1">
-						<stop
-							offset="5%"
-							stopColor="var(--color-level)"
-							stopOpacity={0.8}
-						/>
-						<stop
-							offset="95%"
-							stopColor="var(--color-level)"
-							stopOpacity={0.1}
-						/>
-					</linearGradient>
-				</defs>
-				<CartesianGrid strokeDasharray="3 3" />
-				<XAxis
-					xAxisId="0"
-					type="number"
-					domain={domain}
-					scale="time"
-					tickFormatter={(v, _i) => moment(v).format("MMM Do YY")}
-					dataKey="measuredAt"
-				/>
-				<YAxis type="number" domain={[900, 950]} />
-				<ChartTooltip
-					content={
-						<ChartTooltipContent
-							labelKey={"measuredAt"}
-							labelFormatter={(_value, props) => {
-								if (!props || props.length === 0) {
-									return "";
-								}
-								return moment(props[0].payload.measuredAt).format(
-									"MMM Do YY h:mm:ss a",
-								);
-							}}
-						/>
-					}
-				/>
-				<ReferenceLine
-					y={915}
-					label="Full Pool"
-					stroke="var(--chart-1)"
-					strokeDasharray="3 3"
-				/>
-				<ReferenceLine
-					y={935.47}
-					label="Record High (Apr 27, 2011)"
-					stroke="var(--chart-2)"
-					strokeDasharray="3 3"
-				/>
-				<ReferenceLine
-					y={947}
-					label="Max Capacity (top of dam)"
-					stroke="var(--color-red-600)"
-					strokeDasharray="3 3"
-				/>
+			<ResponsiveContainer width="100%" minHeight={420}>
+				<AreaChart
+					id={"level"}
+					data={levelData}
+					margin={{
+						top: 10,
+						right: 10,
+						left: 0,
+						bottom: 0,
+					}}
+				>
+					<defs>
+						<linearGradient id="fillLevel" x1="0" y1="0" x2="0" y2="1">
+							<stop
+								offset="5%"
+								stopColor="var(--color-level)"
+								stopOpacity={0.8}
+							/>
+							<stop
+								offset="95%"
+								stopColor="var(--color-level)"
+								stopOpacity={0.1}
+							/>
+						</linearGradient>
+					</defs>
+					<CartesianGrid
+						strokeDasharray="3 3"
+						stroke="var(--color-border)"
+						opacity={0.3}
+					/>
+					<XAxis
+						xAxisId="0"
+						type="number"
+						domain={domain}
+						scale="time"
+						tickFormatter={(v, _i) => moment(v).format("MMM Do YY")}
+						dataKey="measuredAt"
+						stroke="var(--color-muted-foreground)"
+					/>
+					<YAxis
+						type="number"
+						domain={[900, 950]}
+						stroke="var(--color-muted-foreground)"
+					/>
+					<ChartTooltip
+						content={
+							<ChartTooltipContent
+								labelKey={"measuredAt"}
+								labelFormatter={(_value, props) => {
+									if (!props || props.length === 0) {
+										return "";
+									}
+									return moment(props[0].payload.measuredAt).format(
+										"MMM Do YY h:mm:ss a",
+									);
+								}}
+							/>
+						}
+					/>
+					<ReferenceLine
+						y={915}
+						label="Full Pool"
+						stroke="var(--chart-1)"
+						strokeDasharray="3 3"
+					/>
+					<ReferenceLine
+						y={935.47}
+						label="Record High (Apr 27, 2011)"
+						stroke="var(--chart-2)"
+						strokeDasharray="3 3"
+					/>
+					<ReferenceLine
+						y={947}
+						label="Max Capacity (top of dam)"
+						stroke="var(--color-red-600)"
+						strokeDasharray="3 3"
+					/>
 
-				{/* <Legend /> */}
-				<Area
-					type="natural"
-					dataKey="level"
-					stroke={"var(--color-level"}
-					fill={"url(#fillLevel)"}
-					name="level"
-					dot={false}
-				/>
-			</AreaChart>
+					<Area
+						type="natural"
+						dataKey="level"
+						stroke={"var(--chart-3)"}
+						fill={"url(#fillLevel)"}
+						name="level"
+						dot={false}
+					/>
+				</AreaChart>
+			</ResponsiveContainer>
 		</ChartContainer>
 	);
 };
