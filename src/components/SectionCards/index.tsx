@@ -36,12 +36,6 @@ export function SectionCards({ data, levelLastYear }: CardsProps) {
 	const differenceFromLastYear = levelLastYear
 		? round(currentLevel - levelLastYear.level, 2)
 		: null;
-	const percentChangeFromLastYear = levelLastYear
-		? round(
-				((currentLevel - levelLastYear.level) / levelLastYear.level) * 100,
-				2,
-			)
-		: null;
 
 	const getDirection = () => {
 		if (data.length < 2) return 0;
