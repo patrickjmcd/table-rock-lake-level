@@ -70,7 +70,6 @@ export const getLevelLastYear = async (): Promise<
 	);
 	// 24 hours buffer
 	const startTime = new Date(oneYearAgo.getTime() - 24 * 60 * 60 * 1000);
-	console.log("Fetching level data from", startTime, "to", oneYearAgo);
 	const data = await getLevelData(startTime, oneYearAgo);
 	if (data.length === 0) {
 		console.error("No level data found for", startTime, "to", oneYearAgo);

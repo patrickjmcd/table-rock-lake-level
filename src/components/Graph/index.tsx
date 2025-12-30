@@ -64,7 +64,7 @@ const Graph = ({ levelData }: GraphProps) => {
 			</div>
 			<ChartContainer
 				config={chartConfig}
-				className="w-full h-[260px] sm:h-[320px] lg:h-[420px]"
+				className="w-full h-65 sm:h-80 lg:h-105"
 			>
 				<AreaChart
 					id={"level"}
@@ -133,6 +133,7 @@ const Graph = ({ levelData }: GraphProps) => {
 					<ChartTooltip
 						content={
 							<ChartTooltipContent
+								className={"text-slate-950"}
 								labelKey={"measuredAt"}
 								labelFormatter={(_value, props) => {
 									if (!props || props.length === 0) {
