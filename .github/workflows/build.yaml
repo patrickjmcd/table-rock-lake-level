@@ -21,23 +21,15 @@ jobs:
 
   build-image:
     name: "Build Image and push to Github Container Registry"
-    runs-on: ${{ matrix.builder }}
+    runs-on: ubuntu-latest
     needs: setup
-    strategy:
-      matrix:
-        include:
-          - builder: ubuntu-latest
-            platform: linux/amd64
-          - builder: [ self-hosted, linux, ARM64 ]
-            platform: linux/arm64
-    
+
     steps:
-      - name: Prepare
-        run: |
-          platform=${{ matrix.platform }}
-          echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV
       - name: Clone
         uses: actions/checkout@v6
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -58,29 +50,11 @@ jobs:
         with:
           context: .
           push: true
-          platforms: ${{ matrix.platform }}
-          tags: ghcr.io/patrickjmcd/table-rock-lake-level:${{ needs.setup.outputs.image_tag }}-${{ env.PLATFORM_PAIR }}
+          platforms: linux/amd64,linux/arm64
+          tags: ghcr.io/patrickjmcd/table-rock-lake-level:${{ needs.setup.outputs.image_tag }}
           build-args: |
             GITHUB_TOKEN=${{ secrets.PAT }}
 
-  merge:
-    runs-on: ubuntu-latest
-    needs:
-      - setup
-      - build-image
-    steps:
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.PAT }}
-
-      - name: Create manifest
-        run: |
-          docker buildx imagetools create -t ghcr.io/patrickjmcd/table-rock-lake-level:${{ needs.setup.outputs.image_tag }} \
-            ghcr.io/patrickjmcd/table-rock-lake-level:${{ needs.setup.outputs.image_tag }}-linux-amd64 \
-            ghcr.io/patrickjmcd/table-rock-lake-level:${{ needs.setup.outputs.image_tag }}-linux-arm64
 
   update-k8s-argo:
     name: "Update k8s-argo"
@@ -88,7 +62,6 @@ jobs:
     needs:
       - setup
       - build-image
-      - merge
     steps:
       - uses: actions/checkout@v6
         with:
