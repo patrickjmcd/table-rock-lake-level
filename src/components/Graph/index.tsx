@@ -24,7 +24,7 @@ interface GraphProps {
 }
 
 const Graph = ({ levelData }: GraphProps) => {
-	const [showRelease, setShowRelease] = useState(true);
+	const [showRelease, setShowRelease] = useState(false);
 
 	const chartConfig = {
 		level: {

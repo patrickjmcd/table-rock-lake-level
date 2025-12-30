@@ -30,7 +30,7 @@ const Home = async () => {
 		const changeFromLastReading =
 			latestMeasurement && previousMeasurement
 				? round(latestMeasurement.level - previousMeasurement.level, 2)
-				: 0;
+				: null;
 		const ftAboveFullPool = latestMeasurement
 			? round(latestMeasurement.level - 915, 2)
 			: 0;
@@ -111,14 +111,50 @@ const Home = async () => {
 							</p>
 							<div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
 								<div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm">
-									<p className="text-slate-300">Change since last reading</p>
-									<p className="mt-2 text-2xl font-semibold text-white">
-										{changeFromLastReading >= 0 ? "+" : ""}
-										{changeFromLastReading.toFixed(2)} ft
-									</p>
-									<p className="text-xs text-slate-400">
-										Based on the previous measurement in this feed.
-									</p>
+									<p className="text-slate-300">Trend vs. last reading</p>
+									<div className="mt-2 flex items-center gap-3">
+										<span
+											className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-semibold ${
+												changeFromLastReading === null
+													? "bg-slate-700/60 text-slate-100"
+													: changeFromLastReading > 0.01
+														? "bg-emerald-400/15 text-emerald-100"
+														: changeFromLastReading < -0.01
+															? "bg-rose-400/15 text-rose-100"
+															: "bg-amber-300/10 text-amber-100"
+											}`}
+										>
+											<span
+												className={`text-lg leading-none ${
+													changeFromLastReading === null
+														? ""
+														: changeFromLastReading > 0.01
+															? "text-emerald-300"
+															: changeFromLastReading < -0.01
+																? "text-rose-300"
+																: "text-amber-200"
+												}`}
+											>
+												{changeFromLastReading === null
+													? "–"
+													: changeFromLastReading > 0.01
+														? "↑"
+														: changeFromLastReading < -0.01
+															? "↓"
+															: "→"}
+											</span>
+											{changeFromLastReading === null
+												? "No prior reading"
+												: changeFromLastReading > 0.01
+													? "Rising"
+													: changeFromLastReading < -0.01
+														? "Falling"
+														: "Holding steady"}
+										</span>
+										<p className="text-xs text-slate-300">
+											Based on the previous measurement in this feed.
+										</p>
+									</div>
 								</div>
 								<div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm">
 									<p className="text-slate-300">Compared to last year</p>
