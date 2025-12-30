@@ -15,6 +15,7 @@ import {
 	ChartContainer,
 	ChartTooltip,
 	ChartTooltipContent,
+	type CustomTooltipProps,
 } from "@/components/ui/chart";
 import type { LevelMeasurement } from "@/lib/level";
 
@@ -131,8 +132,9 @@ const Graph = ({ levelData }: GraphProps) => {
 						/>
 					)}
 					<ChartTooltip
-						content={
+						content={(props: CustomTooltipProps) => (
 							<ChartTooltipContent
+								{...props}
 								className={"text-slate-950"}
 								labelKey={"measuredAt"}
 								labelFormatter={(_value, props) => {
@@ -145,7 +147,7 @@ const Graph = ({ levelData }: GraphProps) => {
 								}}
 								formatter={(value, name, item) => {
 									if (name === "release") {
-										return [`${value.toLocaleString()} cfs`, "Release rate"];
+										return [`${value?.toLocaleString()} cfs`, "Release rate"];
 									}
 									if (name === "level") {
 										return [`${value} ft`, "Water level"];
@@ -153,7 +155,7 @@ const Graph = ({ levelData }: GraphProps) => {
 									return [value, item.name];
 								}}
 							/>
-						}
+						)}
 					/>
 					<ReferenceLine
 						y={915}

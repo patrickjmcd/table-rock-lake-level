@@ -2,10 +2,7 @@ import { MongoClient } from "mongodb";
 
 const getMongoURI = () => {
 	if (process.env.MONGODB_URI) {
-		console.log(
-			"connecting to mongo with uri from env",
-			process.env.MONGODB_URI,
-		);
+		console.log("connecting to mongo with uri from env");
 		return process.env.MONGODB_URI;
 	}
 	throw new Error("MONGODB_URI not found in env");
