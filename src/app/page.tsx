@@ -89,21 +89,18 @@ const Home = async () => {
 						</div>
 						<Graph levelData={levelData} />
 					</div>
-					<div className="space-y-4 rounded-3xl border border-white/10 bg-gradient-to-b from-slate-900/60 via-slate-900/40 to-slate-900/30 p-5 shadow-xl shadow-sky-900/30">
+					<div className="space-y-4 rounded-3xl border border-white/10 bg-linear-to-b from-slate-900/60 via-slate-900/40 to-slate-900/30 p-5 shadow-xl shadow-sky-900/30">
 						<div className="rounded-2xl border border-white/10 bg-white/5 p-4">
 							<div className="flex items-center justify-between text-sm text-slate-200">
 								<p>Current water level</p>
-								<span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-sky-100">
-									Full pool: 915 ft
+								<span className="whitespace-nowrap rounded-full border border-emerald-300/30 bg-emerald-400/10 px-3 py-1 text-sm font-medium text-emerald-100">
+									{ftAboveFullPool >= 0 ? "Above" : "Below"} full pool
 								</span>
 							</div>
 							<div className="mt-3 flex items-baseline gap-3">
 								<p className="text-5xl font-semibold text-white">
 									{round(latestMeasurement?.level ?? 0, 2)} ft
 								</p>
-								<span className="whitespace-nowrap rounded-full border border-emerald-300/30 bg-emerald-400/10 px-3 py-1 text-sm font-medium text-emerald-100">
-									{ftAboveFullPool >= 0 ? "Above" : "Below"} full pool
-								</span>
 							</div>
 							<p className="mt-2 text-sm text-slate-200/80">
 								{Math.abs(ftAboveFullPool)} ft{" "}
@@ -151,9 +148,9 @@ const Home = async () => {
 														? "Falling"
 														: "Holding steady"}
 										</span>
-										<p className="flex-1 min-w-0 break-words text-xs leading-relaxed text-slate-300">
-											Based on the previous measurement in this feed.
-										</p>
+										{/*<p className="flex-1 min-w-0 wrap-break-word text-xs leading-relaxed text-slate-300">*/}
+										{/*	Based on the previous measurement in this feed.*/}
+										{/*</p>*/}
 									</div>
 								</div>
 								<div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm">
