@@ -32,7 +32,7 @@ export const getLevelData = async (
 		}
 
 		if (!startTime) {
-			startTime = new Date(new Date().setDate(endTime.getDate() - 21));
+			startTime = new Date(endTime.getTime() - 21 * 24 * 60 * 60 * 1000);
 		}
 
 		const db = MongoClient.db("lake-info");
@@ -45,7 +45,7 @@ export const getLevelData = async (
 		};
 		const response = await collection
 			.find<LevelMeasurement>(query, {
-				sort: { measuredAt: 1 },
+				sort: { measuredAt: -1 },
 				limit: 1000,
 			})
 			.toArray();

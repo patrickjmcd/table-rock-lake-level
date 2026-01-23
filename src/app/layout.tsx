@@ -4,8 +4,34 @@ import "../styles/globals.css";
 import Navbar from "@/components/NavbarSimple";
 
 export const metadata: Metadata = {
-	title: "Table Rock Lake Level",
-	description: "Table Rock Lake Level data from the US Army Corp of Engineers",
+	title: "Table Rock Lake Level - Current Water Level & Release Rates",
+	description:
+		"Live Table Rock Lake water level, elevation, and dam release rates from the US Army Corps of Engineers. Updated hourly with historical data and charts.",
+	keywords: [
+		"Table Rock Lake",
+		"lake level",
+		"water level",
+		"dam release",
+		"Branson",
+		"Missouri",
+		"fishing",
+		"boating",
+	],
+	openGraph: {
+		title: "Table Rock Lake Level - Current Water Level & Release Rates",
+		description:
+			"Live Table Rock Lake water level, elevation, and dam release rates. Updated hourly.",
+		url: "https://tablerocklakelevel.com",
+		siteName: "Table Rock Lake Level",
+		type: "website",
+	},
+	twitter: {
+		card: "summary",
+		title: "Table Rock Lake Level",
+		description:
+			"Live Table Rock Lake water level, elevation, and dam release rates.",
+	},
+	metadataBase: new URL("https://tablerocklakelevel.com"),
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

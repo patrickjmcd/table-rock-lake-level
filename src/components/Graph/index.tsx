@@ -37,10 +37,24 @@ const Graph = ({ levelData }: GraphProps) => {
 		},
 	} satisfies ChartConfig;
 
-	const domain = [
-		levelData[0].measuredAt.getTime(),
-		levelData[levelData.length - 1].measuredAt.getTime(),
-	];
+	const domain = useMemo(() => {
+		const times = levelData.map((d) => d.measuredAt.getTime());
+		return [Math.min(...times), Math.max(...times)];
+	}, [levelData]);
+
+	const xAxisTicks = useMemo(() => {
+		const start = new Date(domain[0]);
+		const end = new Date(domain[1]);
+		const ticks: number[] = [];
+		const current = new Date(start);
+		current.setHours(0, 0, 0, 0);
+		current.setDate(current.getDate() + 1);
+		while (current <= end) {
+			ticks.push(current.getTime());
+			current.setDate(current.getDate() + 3);
+		}
+		return ticks;
+	}, [domain]);
 
 	const releaseDomain = useMemo(() => {
 		const maxRelease = Math.max(
@@ -113,7 +127,8 @@ const Graph = ({ levelData }: GraphProps) => {
 						type="number"
 						domain={domain}
 						scale="time"
-						tickFormatter={(v, _i) => moment(v).format("MMM Do YY")}
+						ticks={xAxisTicks}
+						tickFormatter={(v, _i) => moment(v).format("MMM Do")}
 						dataKey="measuredAt"
 						stroke="var(--color-muted-foreground)"
 					/>
