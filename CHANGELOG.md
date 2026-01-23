@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.5.0](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.4.1...v0.5.0) (2026-01-23)
+
+
+### Features
+
+* add Vercel Analytics integration ([0f5bbaf](https://github.com/patrickjmcd/table-rock-lake-level/commit/0f5bbafcc31b8908e081142d5495c66f118030f6))
+* integrate Vercel Speed Insights ([3dcb9bd](https://github.com/patrickjmcd/table-rock-lake-level/commit/3dcb9bd204ef1be3b854a9a2b2891cbce59af0b1))
+
+
+### Bug Fixes
+
+* change date sorting order in level measurements ([724c634](https://github.com/patrickjmcd/table-rock-lake-level/commit/724c634951c8ba22c68c2ff069e852d255256968))
+* date ordering/filtering ([e30f8c0](https://github.com/patrickjmcd/table-rock-lake-level/commit/e30f8c02e0e95f7e6c72f83daffa243d1fd9418f))
+* **deps:** update dependency recharts to v3 ([#86](https://github.com/patrickjmcd/table-rock-lake-level/issues/86)) ([7e21374](https://github.com/patrickjmcd/table-rock-lake-level/commit/7e2137446ec779589837ff59204091310d00bf98))
+* update for recharts v3 ([69782a5](https://github.com/patrickjmcd/table-rock-lake-level/commit/69782a5b4a03d0d1b68731ecc749c3a3e8c34c83))
+
 ## [0.4.1](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.4.0...v0.4.1) (2025-12-30)
 
 
