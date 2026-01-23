@@ -45,7 +45,7 @@ export const getLevelData = async (
 		};
 		const response = await collection
 			.find<LevelMeasurement>(query, {
-				sort: { measuredAt: -1 },
+				sort: { measuredAt: 1 },
 				limit: 1000,
 			})
 			.toArray();
