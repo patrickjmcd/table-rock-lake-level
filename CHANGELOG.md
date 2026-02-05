@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.5.0](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.4.1...v0.5.0) (2026-02-05)
+
+
+### Features
+
+* add Vercel Analytics integration ([0f5bbaf](https://github.com/patrickjmcd/table-rock-lake-level/commit/0f5bbafcc31b8908e081142d5495c66f118030f6))
+* integrate Vercel Speed Insights ([3dcb9bd](https://github.com/patrickjmcd/table-rock-lake-level/commit/3dcb9bd204ef1be3b854a9a2b2891cbce59af0b1))
+
+
+### Bug Fixes
+
+* change date sorting order in level measurements ([724c634](https://github.com/patrickjmcd/table-rock-lake-level/commit/724c634951c8ba22c68c2ff069e852d255256968))
+* date ordering/filtering ([e30f8c0](https://github.com/patrickjmcd/table-rock-lake-level/commit/e30f8c02e0e95f7e6c72f83daffa243d1fd9418f))
+* **deps:** update dependency lucide-react to ^0.563.0 ([#98](https://github.com/patrickjmcd/table-rock-lake-level/issues/98)) ([802af61](https://github.com/patrickjmcd/table-rock-lake-level/commit/802af615fab9a4e4576955a1ab19e6557b28e46d))
+* **deps:** update dependency next to v16.1.6 ([#95](https://github.com/patrickjmcd/table-rock-lake-level/issues/95)) ([8f6b39a](https://github.com/patrickjmcd/table-rock-lake-level/commit/8f6b39acbb1e6c29aac2fa7e3b6c3ad0671e5fcc))
+* **deps:** update dependency recharts to v3 ([#86](https://github.com/patrickjmcd/table-rock-lake-level/issues/86)) ([7e21374](https://github.com/patrickjmcd/table-rock-lake-level/commit/7e2137446ec779589837ff59204091310d00bf98))
+* update for recharts v3 ([69782a5](https://github.com/patrickjmcd/table-rock-lake-level/commit/69782a5b4a03d0d1b68731ecc749c3a3e8c34c83))
+
 ## [0.4.1](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.4.0...v0.4.1) (2025-12-30)
 
 
