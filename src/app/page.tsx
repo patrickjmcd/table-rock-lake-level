@@ -226,7 +226,7 @@ const Home = async () => {
 						</div>
 					</div>
 					<LevelDataTable
-						data={levelData.toReversed()}
+						data={levelData}
 						columns={levelColumns}
 					/>
 				</div>
