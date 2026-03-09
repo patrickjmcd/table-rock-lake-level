@@ -1,3 +1,5 @@
+export const revalidate = 3600; // re-render at most once per hour
+
 import { round } from "lodash";
 import Link from "next/link";
 import ErrorPage from "@/components/ErrorPage";
