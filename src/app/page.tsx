@@ -1,3 +1,5 @@
+import { SparklesIcon } from "@heroicons/react/24/outline";
+
 export const revalidate = 3600; // re-render at most once per hour
 
 import { round } from "lodash";
@@ -6,6 +8,7 @@ import ErrorPage from "@/components/ErrorPage";
 import Graph from "@/components/Graph";
 import { levelColumns } from "@/components/LevelTable/columns";
 import { LevelDataTable } from "@/components/LevelTable/data-table";
+import { getAiConditionsSummary } from "@/lib/aiSummary";
 import {
 	getLevelData,
 	getLevelLastYear,
@@ -38,6 +41,14 @@ const Home = async () => {
 				? round(latestMeasurement.level - levelLastYear.level, 2)
 				: null;
 
+		const aiSummary = latestMeasurement
+			? await getAiConditionsSummary(
+					latestMeasurement,
+					changeFromLastReading,
+					differenceFromLastYear,
+				)
+			: null;
+
 		return (
 			<div className="flex flex-col gap-8">
 				<section className="rounded-3xl border border-white/10 bg-white/5 px-6 py-7 shadow-2xl shadow-sky-900/40 backdrop-blur lg:px-8 lg:py-10">
@@ -67,6 +78,24 @@ const Home = async () => {
 						</div>
 					</div>
 				</section>
+
+				{aiSummary && (
+					<section className="rounded-3xl border border-sky-400/20 bg-sky-500/10 px-6 py-5 shadow-xl shadow-sky-900/30 backdrop-blur">
+						<div className="flex items-center gap-4">
+							<div className="flex shrink-0 items-center justify-center rounded-full border border-sky-400/30 bg-sky-500/20 size-8">
+								<SparklesIcon className={"size-4 text-sky-100"} />
+							</div>
+							<div>
+								<p className="mb-1 text-xs uppercase tracking-[0.3em] text-sky-300/70">
+									AI conditions summary
+								</p>
+								<p className="text-sm leading-relaxed text-slate-200">
+									{aiSummary}
+								</p>
+							</div>
+						</div>
+					</section>
+				)}
 
 				<div className="grid gap-6 lg:grid-cols-3">
 					<div className="rounded-3xl border border-white/10 bg-white/5 p-4 shadow-2xl shadow-sky-900/40 lg:col-span-2 order-2 lg:order-1">
@@ -227,10 +256,7 @@ const Home = async () => {
 							</p>
 						</div>
 					</div>
-					<LevelDataTable
-						data={levelData}
-						columns={levelColumns}
-					/>
+					<LevelDataTable data={levelData} columns={levelColumns} />
 				</div>
 
 				<div className="w-full rounded-3xl border border-white/10 bg-white/5 p-6 text-center text-sm text-slate-300 shadow-xl shadow-sky-900/30">
