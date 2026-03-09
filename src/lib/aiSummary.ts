@@ -25,7 +25,7 @@ export async function getAiConditionsSummary(
         : changeFromLastReading > 0.01
           ? `Rising +${changeFromLastReading} ft since last reading.`
           : changeFromLastReading < -0.01
-            ? `Falling ${changeFromLastReading} ft since last reading.`
+            ? `Falling ${Math.abs(changeFromLastReading)} ft since last reading.`
             : "Holding steady since last reading.";
 
     const yearOverYear =
