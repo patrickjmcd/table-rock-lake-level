@@ -17,7 +17,9 @@ import {
 
 const getLatest = (data: LevelMeasurement[]): LevelMeasurement | undefined => {
 	if (data.length > 0) {
-		return data[data.length - 1];
+		return data.sort(
+			(a, b) => b.measuredAt.getTime() - a.measuredAt.getTime(),
+		)[0];
 	}
 	return undefined;
 };
@@ -58,7 +60,7 @@ const Home = async () => {
 								Lake overview
 							</p>
 							<h1 className="text-4xl font-semibold leading-tight text-white sm:text-5xl">
-								Table Rock levels &amp; releases
+								Table Rock Lake Level & Release Rates
 							</h1>
 							<p className="max-w-3xl text-base text-slate-200/85 sm:text-lg">
 								Current lake elevation, turbine + spillway flow, and recent
