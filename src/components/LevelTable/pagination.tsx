@@ -1,4 +1,4 @@
-import type { Table } from "@tanstack/react-table";
+import type { ReactTable, RowData } from "@tanstack/react-table";
 import {
 	ChevronLeft,
 	ChevronRight,
@@ -6,6 +6,7 @@ import {
 	ChevronsRight,
 } from "lucide-react";
 
+import type { LevelTableFeatures } from "@/components/LevelTable/features";
 import { Button } from "@/components/ui/button";
 import {
 	Select,
@@ -15,11 +16,11 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 
-interface DataTablePaginationProps<TData> {
-	table: Table<TData>;
+interface DataTablePaginationProps<TData extends RowData> {
+	table: ReactTable<LevelTableFeatures, TData>;
 }
 
-export function DataTablePagination<TData>({
+export function DataTablePagination<TData extends RowData>({
 	table,
 }: DataTablePaginationProps<TData>) {
 	return (
@@ -28,13 +29,13 @@ export function DataTablePagination<TData>({
 				<div className="flex items-center space-x-2">
 					<p className="text-sm font-medium">Rows per page</p>
 					<Select
-						value={`${table.getState().pagination.pageSize}`}
+						value={`${table.state.pagination.pageSize}`}
 						onValueChange={(value) => {
 							table.setPageSize(Number(value));
 						}}
 					>
 						<SelectTrigger className="h-8 w-17.5">
-							<SelectValue placeholder={table.getState().pagination.pageSize} />
+							<SelectValue placeholder={table.state.pagination.pageSize} />
 						</SelectTrigger>
 						<SelectContent side="top">
 							{[10, 20, 25, 30, 40, 50].map((pageSize) => (
@@ -46,8 +47,7 @@ export function DataTablePagination<TData>({
 					</Select>
 				</div>
 				<div className="flex w-25 items-center justify-center text-sm font-medium">
-					Page {table.getState().pagination.pageIndex + 1} of{" "}
-					{table.getPageCount()}
+					Page {table.state.pagination.pageIndex + 1} of {table.getPageCount()}
 				</div>
 				<div className="flex items-center space-x-2">
 					<Button

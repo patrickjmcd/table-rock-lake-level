@@ -1,9 +1,10 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
+import type { LevelTableFeatures } from "@/components/LevelTable/features";
 import type { LevelMeasurement } from "@/lib/level";
 
-export const levelColumns: ColumnDef<LevelMeasurement>[] = [
+export const levelColumns: ColumnDef<LevelTableFeatures, LevelMeasurement>[] = [
 	{
 		accessorKey: "measuredAt",
 		header: "Measured At",
@@ -11,7 +12,6 @@ export const levelColumns: ColumnDef<LevelMeasurement>[] = [
 			const date: Date = getValue<Date>();
 			return date.toLocaleString();
 		},
-		sortingFn: "datetime",
 	},
 	{
 		accessorKey: "level",

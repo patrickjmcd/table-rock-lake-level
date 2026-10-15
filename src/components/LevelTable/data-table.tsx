@@ -3,10 +3,13 @@
 import {
 	type ColumnDef,
 	flexRender,
-	getCoreRowModel,
-	getPaginationRowModel,
-	useReactTable,
+	type RowData,
+	useTable,
 } from "@tanstack/react-table";
+import {
+	type LevelTableFeatures,
+	levelTableFeatures,
+} from "@/components/LevelTable/features";
 import { DataTablePagination } from "@/components/LevelTable/pagination";
 import {
 	Table,
@@ -17,21 +20,20 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 
-interface DataTableProps<TData, TValue> {
-	columns: ColumnDef<TData, TValue>[];
+interface DataTableProps<TData extends RowData> {
+	columns: ColumnDef<LevelTableFeatures, TData>[];
 	data: TData[];
 }
 
-export function LevelDataTable<TData, TValue>({
+export function LevelDataTable<TData extends RowData>({
 	columns,
 	data,
-}: DataTableProps<TData, TValue>) {
-	const table = useReactTable({
+}: DataTableProps<TData>) {
+	const table = useTable({
+		features: levelTableFeatures,
 		data,
 		columns,
-		getCoreRowModel: getCoreRowModel(),
-		getPaginationRowModel: getPaginationRowModel(),
-		initialState: { pagination: { pageSize: 25 } },
+		initialState: { pagination: { pageIndex: 0, pageSize: 25 } },
 	});
 
 	return (
@@ -64,10 +66,9 @@ export function LevelDataTable<TData, TValue>({
 							table.getRowModel().rows.map((row) => (
 								<TableRow
 									key={row.id}
-									data-state={row.getIsSelected() && "selected"}
 									className="border-white/5 odd:bg-white/5 even:bg-slate-900/40 hover:bg-sky-900/30/80"
 								>
-									{row.getVisibleCells().map((cell) => (
+									{row.getAllCells().map((cell) => (
 										<TableCell
 											key={cell.id}
 											className="px-4 py-3 text-slate-100/90"
