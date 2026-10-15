@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.1](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.5.0...v0.5.1) (2026-10-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @tanstack/react-table to v9 ([#123](https://github.com/patrickjmcd/table-rock-lake-level/issues/123)) ([026d8b2](https://github.com/patrickjmcd/table-rock-lake-level/commit/026d8b2458ba1e02a7e9467f14790a2a9abb9e4d))
+* **deps:** update dependency @vercel/analytics to v2 ([#124](https://github.com/patrickjmcd/table-rock-lake-level/issues/124)) ([55ff773](https://github.com/patrickjmcd/table-rock-lake-level/commit/55ff773ca0a38bda39617dc7fdd4fcdcd34381aa))
+
 ## [0.5.0](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.4.1...v0.5.0) (2026-10-15)
 
 
