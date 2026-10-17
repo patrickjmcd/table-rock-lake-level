@@ -99,9 +99,9 @@ const Home = async () => {
 					</section>
 				)}
 
-				<div className="grid gap-6 lg:grid-cols-3">
-					<div className="rounded-3xl border border-white/10 bg-white/5 p-4 shadow-2xl shadow-sky-900/40 lg:col-span-2 order-2 lg:order-1">
-						<div className="mb-4 flex items-center justify-between">
+				<div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+					<div className="rounded-3xl border border-white/10 bg-white/5 p-4 shadow-2xl shadow-sky-900/40 lg:col-span-2 order-2 lg:order-1 min-w-0">
+						<div className="mb-4 flex items-start justify-between gap-3">
 							<div>
 								<p className="text-xs uppercase tracking-[0.3em] text-sky-200/80">
 									Trendline
@@ -113,13 +113,13 @@ const Home = async () => {
 									Hover to inspect exact values and milestone markers.
 								</p>
 							</div>
-							<span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-200">
+							<span className="hidden shrink-0 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-200 sm:inline-flex">
 								Interactive
 							</span>
 						</div>
 						<Graph levelData={levelData} />
 					</div>
-					<div className="space-y-4 rounded-3xl border border-white/10 bg-linear-to-b from-slate-900/60 via-slate-900/40 to-slate-900/30 p-5 shadow-xl shadow-sky-900/30 order-1 lg:order-2">
+					<div className="space-y-4 rounded-3xl border border-white/10 bg-linear-to-b from-slate-900/60 via-slate-900/40 to-slate-900/30 p-5 shadow-xl shadow-sky-900/30 order-1 lg:order-2 min-w-0">
 						<div className="rounded-2xl border border-white/10 bg-white/5 p-4">
 							<div className="flex items-center justify-between text-sm text-slate-200">
 								<p>Current water level</p>
@@ -244,7 +244,7 @@ const Home = async () => {
 					</div>
 				</div>
 
-				<div className="rounded-3xl border border-white/10 bg-white/5 p-4 shadow-2xl shadow-sky-900/40 lg:p-6">
+				<div className="min-w-0 rounded-3xl border border-white/10 bg-white/5 p-4 shadow-2xl shadow-sky-900/40 lg:p-6">
 					<div className="mb-4 flex items-center justify-between">
 						<div>
 							<p className="text-xs uppercase tracking-[0.3em] text-sky-200/80">
