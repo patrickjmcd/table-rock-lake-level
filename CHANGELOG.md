@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.5.2](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.5.1...v0.5.2) (2026-10-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @vercel/speed-insights to v2 ([#127](https://github.com/patrickjmcd/table-rock-lake-level/issues/127)) ([773751d](https://github.com/patrickjmcd/table-rock-lake-level/commit/773751d4e38cf55924a184e858179226a821d914))
+* **deps:** update dependency lucide-react to v1 ([#128](https://github.com/patrickjmcd/table-rock-lake-level/issues/128)) ([67d0bc8](https://github.com/patrickjmcd/table-rock-lake-level/commit/67d0bc8c46026500a916c179285c3aa4129a30fe))
+* prevent horizontal overflow on mobile home page ([#132](https://github.com/patrickjmcd/table-rock-lake-level/issues/132)) ([0c34967](https://github.com/patrickjmcd/table-rock-lake-level/commit/0c34967d0783d1444b41d5325621a65ded90ac46))
+
 ## [0.5.1](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.5.0...v0.5.1) (2026-10-15)
 
 
