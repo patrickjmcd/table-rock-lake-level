@@ -1,9 +1,21 @@
 "use server";
 
 import Anthropic from "@anthropic-ai/sdk";
+import { round } from "lodash";
 import type { LevelMeasurement } from "./level";
 
 const client = new Anthropic();
+
+const formatNumber = (value: number) =>
+	value.toLocaleString("en-US", { maximumFractionDigits: 2 });
+
+// The model may compute its own figures, so round any number in its output
+// that has more than 2 decimal places.
+const limitDecimals = (text: string) =>
+	text.replace(/(?<![\d.])\d[\d,]*\.\d{3,}(?![\d.])/g, (match) => {
+		const value = round(Number(match.replaceAll(",", "")), 2);
+		return match.includes(",") ? formatNumber(value) : String(value);
+	});
 
 export async function getAiConditionsSummary(
 	latest: LevelMeasurement,
@@ -16,7 +28,7 @@ export async function getAiConditionsSummary(
 
 		const releaseInfo =
 			latest.totalReleaseRate > 0
-				? `Turbine release: ${latest.turbineReleaseRate.toLocaleString()} cfs, spillway release: ${latest.spillwayReleaseRate.toLocaleString()} cfs, total: ${latest.totalReleaseRate.toLocaleString()} cfs.`
+				? `Turbine release: ${formatNumber(latest.turbineReleaseRate)} cfs, spillway release: ${formatNumber(latest.spillwayReleaseRate)} cfs, total: ${formatNumber(latest.totalReleaseRate)} cfs.`
 				: "No water currently being released.";
 
 		const trendInfo =
@@ -43,7 +55,7 @@ Current conditions:
 - ${yearOverYear}
 - ${releaseInfo}
 
-Write 2-3 concise sentences summarizing what these conditions mean practically for lake visitors — think boating, fishing, dock access, and current/flow near the dam. Be direct and specific. No bullet points or headers.`;
+Write 2-3 concise sentences summarizing what these conditions mean practically for lake visitors — think boating, fishing, dock access, and current/flow near the dam. Be direct and specific. Never write a number with more than 2 decimal places. No bullet points or headers.`;
 
 		const response = await client.messages.create({
 			model: "claude-opus-4-6",
@@ -52,7 +64,7 @@ Write 2-3 concise sentences summarizing what these conditions mean practically f
 		});
 
 		const textBlock = response.content.find((b) => b.type === "text");
-		return textBlock?.text ?? null;
+		return textBlock ? limitDecimals(textBlock.text) : null;
 	} catch (e) {
 		console.error("AI summary failed:", e);
 		return null;

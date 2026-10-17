@@ -110,7 +110,7 @@ export function SectionCards({ data, levelLastYear }: CardsProps) {
 					</div>
 					<div className="text-muted-foreground">
 						{levelLastYear
-							? `Last year (${levelLastYear.measuredAt.toLocaleDateString()}): ${levelLastYear.level} ft`
+							? `Last year (${levelLastYear.measuredAt.toLocaleDateString()}): ${round(levelLastYear.level, 2)} ft`
 							: ""}
 					</div>
 				</CardFooter>

@@ -234,7 +234,7 @@ const Home = async () => {
 										<p className="text-slate-300">
 											{latestMeasurement?.totalReleaseRate &&
 											latestMeasurement.totalReleaseRate > 0
-												? `Currently releasing ${latestMeasurement.turbineReleaseRate} cfs for generation and ${latestMeasurement.spillwayReleaseRate} cfs over spillway. `
+												? `Currently releasing ${round(latestMeasurement.turbineReleaseRate, 2)} cfs for generation and ${round(latestMeasurement.spillwayReleaseRate, 2)} cfs over spillway. `
 												: "Not currently releasing water. "}
 										</p>
 									</div>

@@ -1,4 +1,5 @@
 "use client";
+import { round } from "lodash";
 import moment from "moment";
 import { useMemo, useState } from "react";
 import {
@@ -162,10 +163,13 @@ const Graph = ({ levelData }: GraphProps) => {
 								}}
 								formatter={(value, name, item) => {
 									if (name === "release") {
-										return [`${value?.toLocaleString()} cfs`, "Release rate"];
+										return [
+											`${round(Number(value), 2).toLocaleString()} cfs`,
+											"Release rate",
+										];
 									}
 									if (name === "level") {
-										return [`${value} ft`, "Water level"];
+										return [`${round(Number(value), 2)} ft`, "Water level"];
 									}
 									return [value, item.name];
 								}}
