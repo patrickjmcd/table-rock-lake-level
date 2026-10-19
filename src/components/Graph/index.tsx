@@ -16,7 +16,6 @@ import {
 	ChartContainer,
 	ChartTooltip,
 	ChartTooltipContent,
-	type CustomTooltipProps,
 } from "@/components/ui/chart";
 import type { LevelMeasurement } from "@/lib/level";
 
@@ -148,7 +147,7 @@ const Graph = ({ levelData }: GraphProps) => {
 						/>
 					)}
 					<ChartTooltip
-						content={(props: CustomTooltipProps) => (
+						content={(props) => (
 							<ChartTooltipContent
 								{...props}
 								className={"text-slate-950"}
