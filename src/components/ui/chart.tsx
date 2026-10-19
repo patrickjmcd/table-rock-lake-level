@@ -222,7 +222,13 @@ function ChartTooltipContent({
 
 					return (
 						<div
-							key={item.dataKey}
+							// recharts 3.10 widened dataKey to include accessor functions,
+							// which can't be React keys.
+							key={
+								typeof item.dataKey === "function"
+									? index
+									: (item.dataKey ?? index)
+							}
 							className={cn(
 								"[&>svg]:text-muted-foreground flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5",
 								indicator === "dot" && "items-center",
