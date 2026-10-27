@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.5.2](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.5.1...v0.5.2) (2026-10-27)
+
+
+### Bug Fixes
+
+* **deps:** repair pnpm lockfile broken by [#134](https://github.com/patrickjmcd/table-rock-lake-level/issues/134) ([#138](https://github.com/patrickjmcd/table-rock-lake-level/issues/138)) ([6a2150d](https://github.com/patrickjmcd/table-rock-lake-level/commit/6a2150d67a04349f9b7be143843fc5825f43b1d4))
+* **deps:** update dependency @anthropic-ai/sdk to v1 ([#135](https://github.com/patrickjmcd/table-rock-lake-level/issues/135)) ([3ec99f1](https://github.com/patrickjmcd/table-rock-lake-level/commit/3ec99f1a2e5a701b21c6de4b76e85f96f0c25218))
+* **deps:** update dependency @vercel/speed-insights to v2 ([#127](https://github.com/patrickjmcd/table-rock-lake-level/issues/127)) ([773751d](https://github.com/patrickjmcd/table-rock-lake-level/commit/773751d4e38cf55924a184e858179226a821d914))
+* **deps:** update dependency lucide-react to v1 ([#128](https://github.com/patrickjmcd/table-rock-lake-level/issues/128)) ([67d0bc8](https://github.com/patrickjmcd/table-rock-lake-level/commit/67d0bc8c46026500a916c179285c3aa4129a30fe))
+* **deps:** update npm non-major dependencies ([#134](https://github.com/patrickjmcd/table-rock-lake-level/issues/134)) ([b4f739b](https://github.com/patrickjmcd/table-rock-lake-level/commit/b4f739b23731b0bdc46b8738aba8dec699a69d9a))
+* **deps:** update npm non-major dependencies ([#137](https://github.com/patrickjmcd/table-rock-lake-level/issues/137)) ([35cf22c](https://github.com/patrickjmcd/table-rock-lake-level/commit/35cf22c7cf76db4bd6ccccdc46ab8a26282617d3))
+* prevent horizontal overflow on mobile home page ([#132](https://github.com/patrickjmcd/table-rock-lake-level/issues/132)) ([0c34967](https://github.com/patrickjmcd/table-rock-lake-level/commit/0c34967d0783d1444b41d5325621a65ded90ac46))
+
 ## [0.5.1](https://github.com/patrickjmcd/table-rock-lake-level/compare/v0.5.0...v0.5.1) (2026-10-15)
 
 
